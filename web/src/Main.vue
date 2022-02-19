@@ -406,7 +406,8 @@ body {
 
         td.network-real-time {
             flex-direction: column;
-            width: auto !important;
+            width: inherit !important;
+
             > span {
                 margin: 3px 0px !important;
 
@@ -432,6 +433,10 @@ body {
         .progress {
             width: 60px !important;
             font-size: 8px !important;
+        }
+
+        .specific-info-table {
+            // justify-content: flex-start !important;
         }
     }
 }
