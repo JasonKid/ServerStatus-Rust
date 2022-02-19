@@ -14427,29 +14427,30 @@ body {
   text-align: center;
   white-space: nowrap;
 }
-.table .ant-table-content > table td.network-real-time {
-  display: flex;
-  width: 230px;
+.table .ant-table-content > table .ant-table-expand-icon-col {
+  visibility: collapse;
 }
-.table .ant-table-content > table td.network-real-time > span:first-child,
-.table .ant-table-content > table td.network-real-time > span:last-child {
+.table .ant-table-content > table td.network-real-time > div {
+  display: flex;
+}
+.table .ant-table-content > table td.network-real-time > div > span:first-child,
+.table .ant-table-content > table td.network-real-time > div > span:last-child {
   width: 90px;
   overflow: hidden;
 }
-.table .ant-table-content > table td.network-real-time > span:first-child > span,
-.table .ant-table-content > table td.network-real-time > span:last-child > span {
+.table .ant-table-content > table td.network-real-time > div > span:first-child > span,
+.table .ant-table-content > table td.network-real-time > div > span:last-child > span {
   display: block;
   width: 100%;
 }
-.table .ant-table-content > table td.network-real-time > span:nth-child(2) {
+.table .ant-table-content > table td.network-real-time > div > span:nth-child(2) {
   flex: 1;
 }
-.table .ant-table-content > table td.loss-rate {
+.table .ant-table-content > table td.loss-rate > div {
   display: flex;
-  width: 160px;
   justify-content: center;
 }
-.table .ant-table-content > table td.loss-rate > span {
+.table .ant-table-content > table td.loss-rate > div > span {
   display: block;
   width: 30px;
   overflow: hidden;
@@ -14502,18 +14503,17 @@ body {
   .table th {
     padding: 10px !important;
 }
-.table td.network-real-time {
+.table td.network-real-time > div {
     flex-direction: column;
-    width: inherit !important;
 }
-.table td.network-real-time > span {
+.table td.network-real-time > div > span {
     margin: 3px 0px !important;
 }
-.table td.network-real-time > span:first-child,
-  .table td.network-real-time > span:last-child {
+.table td.network-real-time > div > span:first-child,
+  .table td.network-real-time > div > span:last-child {
     width: 82px !important;
 }
-.table td.network-real-time > span:nth-child(2) {
+.table td.network-real-time > div > span:nth-child(2) {
     display: none;
 }
 .table td.load > span {

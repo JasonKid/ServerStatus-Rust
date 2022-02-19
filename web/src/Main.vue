@@ -13,6 +13,7 @@
             :data-source="stats['servers']"
             :pagination="false"
             rowClassName="row"
+            :expandRowByClick="true"
         >
             <template #bodyCell="{column, record}">
                 <template v-if="column.key === 'lastNetwork'">
@@ -36,17 +37,19 @@
                 </template>
 
                 <template v-if="column.key === 'networkRealTime'">
-                    <span>
-                        <a-tag color="orange">
-                            ↓ {{formatBytes(record['network_rx'])}}/s
-                        </a-tag>
-                    </span>
-                    <span>-</span>
-                    <span>
-                        <a-tag color="green">
-                            ↑ {{formatBytes(record['network_tx'])}}/s
-                        </a-tag>
-                    </span>
+                    <div>
+                        <span>
+                            <a-tag color="orange">
+                                ↓ {{formatBytes(record['network_rx'])}}/s
+                            </a-tag>
+                        </span>
+                        <span>-</span>
+                        <span>
+                            <a-tag color="green">
+                                ↑ {{formatBytes(record['network_tx'])}}/s
+                            </a-tag>
+                        </span>
+                    </div>
                 </template>
 
                 <template v-if="column.key === 'network'">
@@ -102,9 +105,11 @@
                 </template>
 
                 <template v-if="column.key === 'lossRate'">
-                    <a-tag :color="getColor(column.key, record['ping_189'])">{{record['ping_189']}}</a-tag>
-                    <a-tag :color="getColor(column.key, record['ping_10010'])">{{record['ping_10010']}}</a-tag>
-                    <a-tag :color="getColor(column.key, record['ping_10086'])">{{record['ping_10086']}}</a-tag>
+                    <div>
+                        <a-tag :color="getColor(column.key, record['ping_189'])">{{record['ping_189']}}</a-tag>
+                        <a-tag :color="getColor(column.key, record['ping_10010'])">{{record['ping_10010']}}</a-tag>
+                        <a-tag :color="getColor(column.key, record['ping_10086'])">{{record['ping_10086']}}</a-tag>
+                    </div>
                 </template>
             </template>
 
@@ -318,34 +323,40 @@ body {
             white-space: nowrap;
         }
 
-        td.network-real-time {
-            display: flex;
-            width: 230px;
-            > span {
-                &:first-child, &:last-child {
-                    width: 90px;
-                    overflow: hidden;
+        .ant-table-expand-icon-col {
+            visibility: collapse;
+        }
 
-                    > span {
-                        display: block;
-                        width: 100%;
+        td.network-real-time {
+            > div {
+                display: flex;
+                > span {
+                    &:first-child, &:last-child {
+                        width: 90px;
+                        overflow: hidden;
+
+                        > span {
+                            display: block;
+                            width: 100%;
+                        }
                     }
-                }
-                &:nth-child(2) {
-                    flex: 1;
+                    &:nth-child(2) {
+                        flex: 1;
+                    }
                 }
             }
         }
 
         td.loss-rate {
-            display: flex;
-            width: 160px;
-            justify-content: center;
+            > div {
+                display: flex;
+                justify-content: center;
 
-            > span {
-                display: block;
-                width: 30px;
-                overflow: hidden;
+                > span {
+                    display: block;
+                    width: 30px;
+                    overflow: hidden;
+                }
             }
         }
 
@@ -405,19 +416,19 @@ body {
         }
 
         td.network-real-time {
-            flex-direction: column;
-            width: inherit !important;
+            > div {
+                flex-direction: column;
+                > span {
+                    margin: 3px 0px !important;
 
-            > span {
-                margin: 3px 0px !important;
-
-                &:first-child, &:last-child {
-                    width: 82px !important;
+                    &:first-child, &:last-child {
+                        width: 82px !important;
+                    }
+                    &:nth-child(2) {
+                        display: none;
+                    }
+                    
                 }
-                &:nth-child(2) {
-                    display: none;
-                }
-                
             }
         }
 
