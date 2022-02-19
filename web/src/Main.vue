@@ -249,16 +249,17 @@ export default {
             switch (key) {
                 case "memory":
                 case "hdd":
-                    if(percentage >= 80) return 'orange';
-                    if(percentage >= 90) return 'red';
                 case "cpu":
-                    return percentage > 50 ? 'red' : 'green';
+                    if(percentage >= 90) return 'red';
+                    if(percentage >= 80) return 'orange';
+                    return 'green';
                 case "lossRate":
-                    if(percentage >= 20) return 'orange';
                     if(percentage >= 50) return 'red';
+                    if(percentage >= 20) return 'orange';
+                    return 'green';
             }
 
-            return 'green';
+            return 'black';
         }
     },
     mounted() {
@@ -331,7 +332,7 @@ body {
                 display: flex;
                 > span {
                     &:first-child, &:last-child {
-                        width: 90px;
+                        width: 100px;
                         overflow: hidden;
 
                         > span {
@@ -362,6 +363,10 @@ body {
             display: flex;
             justify-content: center;
             width: 100px;
+
+            .v-progress-linear__determinate {
+                transition: all .5s cubic-bezier(.4,0,.2,1);
+            }
         }
 
         .specific-info-table {

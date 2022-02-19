@@ -14435,7 +14435,7 @@ body {
 }
 .table .ant-table-content > table td.network-real-time > div > span:first-child,
 .table .ant-table-content > table td.network-real-time > div > span:last-child {
-  width: 90px;
+  width: 100px;
   overflow: hidden;
 }
 .table .ant-table-content > table td.network-real-time > div > span:first-child > span,
@@ -14458,6 +14458,9 @@ body {
   display: flex;
   justify-content: center;
   width: 100px;
+}
+.table .ant-table-content > table .progress .v-progress-linear__determinate {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .table .ant-table-content > table .specific-info-table {
   display: flex;
