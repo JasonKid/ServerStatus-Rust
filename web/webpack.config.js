@@ -1,9 +1,10 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader")
 const { VuetifyLoaderPlugin } = require('vuetify-loader')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
-    mode: "production",
+module.exports = (env) => ({
+    mode: env.production ? "production" : "development",
     entry: "./src",
     output: {
       path: path.resolve(__dirname, "wwwroot"),
@@ -32,14 +33,14 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            use: ["vue-style-loader", {
+            use: [env.production ? MiniCssExtractPlugin.loader : "vue-style-loader", {
               loader: "css-loader", 
               options: {esModule: false}
               }]
           },
           {
             test: /\.less$/,
-            use: ["vue-style-loader", {
+            use: [env.production ? MiniCssExtractPlugin.loader : "vue-style-loader", {
               loader: "css-loader", 
               options: {esModule: false}
               },
@@ -51,7 +52,9 @@ module.exports = {
           }
         ]
       },
-      plugins: [new VueLoaderPlugin(), new VuetifyLoaderPlugin({ autoImport: true, registerStylesSSR: true })],
+      plugins: [new VueLoaderPlugin(), new VuetifyLoaderPlugin({ autoImport: true, registerStylesSSR: true }), new MiniCssExtractPlugin({
+        filename: 'style.css'
+      })],
       resolve: {
         extensions: [".vue", ".js", ".css", ".ts", "less", "sass"]
       },
@@ -69,4 +72,4 @@ module.exports = {
           }
         }
       },
-}
+});

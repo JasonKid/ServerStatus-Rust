@@ -22,23 +22,31 @@
                 </template>
 
                 <template v-if="column.key === 'load'">
-                    {{record['load_1']}}/{{record['load_5']}}/{{record['load_15']}}
+                    <span>
+                        {{record['load_1']}}
+                    </span>
+                    <span>/</span>
+                    <span>
+                        {{record['load_5']}}
+                    </span>
+                    <span>/</span>
+                    <span>
+                        {{record['load_15']}}
+                    </span>
                 </template>
 
                 <template v-if="column.key === 'networkRealTime'">
-                    <div :class="['network-realtime']">
-                        <span>
-                            <a-tag color="orange">
-                                ↓ {{formatBytes(record['network_rx'])}}/s
-                            </a-tag>
-                        </span>
-                        <span>-</span>
-                        <span>
-                            <a-tag color="green">
-                                ↑ {{formatBytes(record['network_tx'])}}/s
-                            </a-tag>
-                        </span>
-                    </div>
+                    <span>
+                        <a-tag color="orange">
+                            ↓ {{formatBytes(record['network_rx'])}}/s
+                        </a-tag>
+                    </span>
+                    <span>-</span>
+                    <span>
+                        <a-tag color="green">
+                            ↑ {{formatBytes(record['network_tx'])}}/s
+                        </a-tag>
+                    </span>
                 </template>
 
                 <template v-if="column.key === 'network'">
@@ -57,7 +65,7 @@
                             :color="getColor(column.key, record['cpu'])"
                         >
                             <template #default="{value}">
-                                <strong style="color: #787878;">{{value}}%</strong>
+                                <strong style="color: #000000;">{{value}}%</strong>
                             </template>
                         </v-progress-linear>
                     </div>
@@ -69,11 +77,10 @@
                             :modelValue="getMemoryPercentage(record)"
                             height="20"
                             rounded-bar
-                            striped
                             :color="getColor(column.key, getMemoryPercentage(record))"
                         >
                             <template #default="{value}">
-                                <strong style="color: #787878;">{{value}}%</strong>
+                                <strong style="color: #000000;">{{value}}%</strong>
                             </template>
                         </v-progress-linear>
                     </div>
@@ -85,24 +92,23 @@
                             :modelValue="getHddPercentage(record)"
                             height="20"
                             rounded-bar
-                            striped
                             :color="getColor(column.key, getHddPercentage(record))"
                         >
                             <template #default="{value}">
-                                <strong style="color: #787878;">{{value}}%</strong>
+                                <strong style="color: #000000;">{{value}}%</strong>
                             </template>
                         </v-progress-linear>
                     </div>
                 </template>
 
                 <template v-if="column.key === 'lossRate'">
-                    <a-tag :color="getColor(column.key, record['ping_189'])">{{record['ping_189']}}</a-tag> -
-                    <a-tag :color="getColor(column.key, record['ping_10010'])">{{record['ping_10010']}}</a-tag> -
+                    <a-tag :color="getColor(column.key, record['ping_189'])">{{record['ping_189']}}</a-tag>
+                    <a-tag :color="getColor(column.key, record['ping_10010'])">{{record['ping_10010']}}</a-tag>
                     <a-tag :color="getColor(column.key, record['ping_10086'])">{{record['ping_10086']}}</a-tag>
                 </template>
             </template>
 
-            <template #expandedRowRender="{ record }" class="fdsafdsa">
+            <template #expandedRowRender="{ record }">
                 <table class="specific-info-table">
                     <tbody>
                         <tr>
@@ -149,49 +155,70 @@ export default {
                 key: "protocal",
                 customRender: () => {
                     return 'IPV4';
-                }
+                },
+                customCell: () => ({class: "protocal"}), 
+                customHeaderCell: () => ({class: "protocal"}), 
+            }, {
+                title: "节点",
+                dataIndex: 'alias',
+                customCell: () => ({class: "alias"}), 
+                customHeaderCell: () => ({class: "alias"}), 
+                fixed: true
             }, {
                 title: "月流量 ↓|↑",
                 key: "lastNetwork" ,
-                customCell: ({record, index, column}) => {
-                    return {
-                        class: "last-network"
-                    };
-                }
-            }, {
-                title: "节点名",
-                dataIndex: 'alias'
+                customCell: () => ({class: "last-network"}), 
+                customHeaderCell: () => ({class: "last-network"}), 
             }, {
                 title: "虚拟化",
-                dataIndex: 'type'
+                dataIndex: 'type',
+                customCell: () => ({class: "type"}), 
+                customHeaderCell: () => ({class: "type"}), 
             }, {
                 title: "位置",
-                dataIndex: 'location'
+                dataIndex: 'location',
+                customCell: () => ({class: "location"}), 
+                customHeaderCell: () => ({class: "location"}), 
             }, {
                 title: "在线时间",
-                dataIndex: 'uptime'
+                dataIndex: 'uptime',
+                customCell: () => ({class: "uptime"}), 
+                customHeaderCell: () => ({class: "uptime"}), 
             }, {
                 title: "负载",
                 key: 'load',
-                responsive: ['sm']
+                customCell: () => ({class: "load"}), 
+                customHeaderCell: () => ({class: "load"}), 
             }, {
                 title: "网络",
-                key: "networkRealTime"
+                key: "networkRealTime",
+                customCell: () => ({class: "network-real-time"}), 
+                customHeaderCell: () => ({class: "network-real-time"}), 
             }, {
                 title: "总流量 ↓|↑",
-                key: "network"
+                key: "network",
+                customCell: () => ({class: "network"}), 
+                customHeaderCell: () => ({class: "network"}), 
             }, {
                 title: "处理器",
-                key: "cpu"
+                key: "cpu",
+                customCell: () => ({class: "cpu"}), 
+                customHeaderCell: () => ({class: "cpu"}), 
             }, {
                 title: "内存",
-                key: "memory"
+                key: "memory",
+                customCell: () => ({class: "memory"}), 
+                customHeaderCell: () => ({class: "memory"}), 
             }, {
                 title: "硬盘",
-                key: "hdd"
+                key: "hdd",
+                customCell: () => ({class: "hdd"}), 
+                customHeaderCell: () => ({class: "hdd"}), 
             }, {
                 title: "丢包率(CU|CT|CM)",
-                key: "lossRate"
+                key: "lossRate",
+                customCell: () => ({class: "loss-rate"}), 
+                customHeaderCell: () => ({class: "loss-rate"}), 
             }]
         }
     },
@@ -231,28 +258,52 @@ export default {
         }
     },
     mounted() {
+        fetch('/json/stats.json')
+                .then(res => res.json())
+                .then(json => this.stats = json);
+
         this.timer = setInterval(() => {
             fetch('/json/stats.json')
                 .then(res => res.json())
                 .then(json => this.stats = json);
         }, 2000);
+    },
+    unmounted() {
+        clearInterval(this.timer);
     }
 }
 </script>
 
 <style lang="less">
+@xs: (max-width: 1650px);
+
+body {
+    overflow-x: hidden;
+}
+
 .header {
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     width: 100%;
     color: white;
     font-size: 50px;
 }
 .content {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     margin-top: 64px + 20px;
     min-height: 100%;
+
+    .ant-table-content {
+        overflow: scroll;
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar { 
+            display: none;  /* Safari and Chrome */
+        }
+    }
 }
 
 .table {
@@ -261,10 +312,47 @@ export default {
         box-shadow: 0 0 20px 5px #d5d5d5;
         border-radius: 10px;
         border-spacing: 0;
-        overflow: hidden;
 
         td, th {
             text-align: center;
+            white-space: nowrap;
+        }
+
+        td.network-real-time {
+            display: flex;
+            width: 230px;
+            > span {
+                &:first-child, &:last-child {
+                    width: 90px;
+                    overflow: hidden;
+
+                    > span {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+                &:nth-child(2) {
+                    flex: 1;
+                }
+            }
+        }
+
+        td.loss-rate {
+            display: flex;
+            width: 160px;
+            justify-content: center;
+
+            > span {
+                display: block;
+                width: 30px;
+                overflow: hidden;
+            }
+        }
+
+        .progress {
+            display: flex;
+            justify-content: center;
+            width: 100px;
         }
 
         .specific-info-table {
@@ -298,30 +386,53 @@ export default {
     }
 }
 
-.last-network {
+@media only screen and @xs {
+    .last-network, .protocal, .type, .uptime, .network, .location {
+        display: none !important;
+    }
 
-}
-.network-realtime {
-    display: flex;
-    > span {
-        &:first-child, &:last-child {
-            flex: 1;
+    .table {
+        .ant-table-expand-icon-col {
+            width: auto !important;
+        }
 
+        th {
+            font-size: 12px !important;
+        }
+        
+        td, th {
+            padding: 10px !important;
+        }
+
+        td.network-real-time {
+            flex-direction: column;
+            width: auto !important;
             > span {
-                display: block;
-                width: 100%;
+                margin: 3px 0px !important;
+
+                &:first-child, &:last-child {
+                    width: 82px !important;
+                }
+                &:nth-child(2) {
+                    display: none;
+                }
+                
             }
         }
-        &:nth-child(2) {
-            width: 10px;
+
+        td.load {
+            > span {
+                display: none;
+                &:nth-child(3) {
+                    display: inline;
+                }
+            }
+        }
+
+        .progress {
+            width: 60px !important;
+            font-size: 8px !important;
         }
     }
-}
-
-.row {
-
-}
-.progress {
-    width: 100px;
 }
 </style>
