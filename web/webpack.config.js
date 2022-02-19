@@ -1,8 +1,9 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader")
+const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 module.exports = {
-    mode: "development",
+    mode: "production",
     entry: "./src",
     output: {
       path: path.resolve(__dirname, "wwwroot"),
@@ -44,11 +45,15 @@ module.exports = {
               },
             "less-loader"]
           },
+          {
+            test: /\.sass$/,
+            use: ['vue-style-loader', 'css-loader', 'sass-loader']
+          }
         ]
       },
-      plugins: [new VueLoaderPlugin()],
+      plugins: [new VueLoaderPlugin(), new VuetifyLoaderPlugin({ autoImport: true, registerStylesSSR: true })],
       resolve: {
-        extensions: [".vue", ".js", ".css", ".ts"]
+        extensions: [".vue", ".js", ".css", ".ts", "less", "sass"]
       },
       devServer: {
         // compress: true,
@@ -56,5 +61,12 @@ module.exports = {
         static: {
           directory: path.join(__dirname, 'wwwroot'),
         },
+        proxy: {
+          "/json/stats.json": {
+            target: "https://tz-rust.vercel.app",
+            secure: false,
+            changeOrigin: true
+          }
+        }
       },
 }
