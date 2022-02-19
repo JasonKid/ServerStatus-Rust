@@ -1,0 +1,6 @@
+{
+    "routes": [{
+        "src": "/json/stats.json",
+        "dest": "https://tz-rust.vercel.app/json/stats.json"
+    }]
+}
