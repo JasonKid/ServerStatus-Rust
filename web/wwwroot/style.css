@@ -14427,9 +14427,6 @@ body {
   text-align: center;
   white-space: nowrap;
 }
-.table .ant-table-content > table .ant-table-expand-icon-col {
-  visibility: collapse;
-}
 .table .ant-table-content > table td.network-real-time > div {
   display: flex;
 }

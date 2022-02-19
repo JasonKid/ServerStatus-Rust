@@ -323,10 +323,6 @@ body {
             white-space: nowrap;
         }
 
-        .ant-table-expand-icon-col {
-            visibility: collapse;
-        }
-
         td.network-real-time {
             > div {
                 display: flex;
