@@ -14440,7 +14440,6 @@ body {
 }
 .table .ant-table-content > table td.network-real-time > div > span:first-child > span,
 .table .ant-table-content > table td.network-real-time > div > span:last-child > span {
-  display: block;
   width: 100%;
 }
 .table .ant-table-content > table td.network-real-time > div > span:nth-child(2) {
@@ -14509,10 +14508,6 @@ body {
 .table td.network-real-time > div > span {
     margin: 3px 0px !important;
 }
-.table td.network-real-time > div > span:first-child,
-  .table td.network-real-time > div > span:last-child {
-    width: 82px !important;
-}
 .table td.network-real-time > div > span:nth-child(2) {
     display: none;
 }
@@ -14525,6 +14520,9 @@ body {
 .table .progress {
     width: 60px !important;
     font-size: 8px !important;
+}
+.table .specific-info-table {
+    justify-content: flex-start !important;
 }
 }
 
